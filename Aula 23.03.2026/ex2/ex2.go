@@ -8,7 +8,7 @@ Crie um programa em Go ( ex2.go ) com duas goroutines disparadas a partir da  ma
 4. Utilize sync.WaitGroup para fazer a main() esperar
 */
 
-package ex2
+package main
 
 import (
 	"fmt"
@@ -16,18 +16,24 @@ import (
 	"time"
 )
 
+var mu sync.Mutex
+
 func imprimeDeUmADez(wg *sync.WaitGroup) {
 	defer wg.Done()
 	for i := 1; i <= 10; i++ {
-		fmt.Printf("%d", i)
+		mu.Lock()
+		fmt.Printf("%d ", i)
+		mu.Unlock()
 		time.Sleep(1 * time.Second)
 	}
 }
 
 func imprimeDeDezAUm(wg *sync.WaitGroup) {
 	defer wg.Done()
-	for i := 10; i >= 1; i++ {
-		fmt.Printf("%d", i)
+	for i := 10; i >= 1; i-- {
+		mu.Lock()
+		fmt.Printf("%d ", i)
+		mu.Unlock()
 		time.Sleep(1 * time.Second)
 	}
 }
