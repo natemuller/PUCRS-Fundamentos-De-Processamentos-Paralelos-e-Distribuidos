@@ -6,13 +6,20 @@
 //
 // Sua tarefa: adicionar um semáforo contador usando o pacote
 // golang.org/x/sync/semaphore para limitar a 3 acessos simultâneos.
+
+// Pergunta: quantas pessoas entram no banheiro ao mesmo tempo? Por que isso é um problema?
+// Todas as 10 entraram ao mesmo tempo, isso é claramente um problema, visto que a capacidade é de 3.
+
 package main
 
 import (
+	"context"
 	"fmt"
 	"math/rand"
 	"sync"
 	"time"
+
+	"golang.org/x/sync/semaphore"
 )
 
 const (
@@ -20,13 +27,21 @@ const (
 	totalPessoas = 10
 )
 
+var sem = semaphore.NewWeighted(int64(capacidade))
 
 func usarBanheiro(id int, wg *sync.WaitGroup) {
 	defer wg.Done()
 
 	fmt.Printf("[Pessoa %2d] quer usar o banheiro\n", id)
 
-	// TODO: adquirir uma permissão do semáforo antes de entrar
+	timeout := time.Duration(1+rand.Intn(3)) * time.Second
+	ctx, cancel := context.WithTimeout(context.Background(), timeout)
+	defer cancel()
+
+	if err := sem.Acquire(ctx, 1); err != nil {
+		fmt.Printf("[Pessoa %2d] desistiu após esperar *v\n", id, timeout)
+	}
+	defer sem.Release(1)
 
 	fmt.Printf("[Pessoa %2d] >>> ENTROU no banheiro\n", id)
 	duracao := time.Duration(1+rand.Intn(3)) * time.Second
@@ -34,6 +49,7 @@ func usarBanheiro(id int, wg *sync.WaitGroup) {
 	fmt.Printf("[Pessoa %2d] <<< SAIU do banheiro (usou %v)\n", id, duracao)
 
 	// TODO: liberar a permissão do semáforo ao sair
+	sem.Release(1)
 }
 
 func main() {
