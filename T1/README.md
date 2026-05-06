@@ -31,7 +31,7 @@ O projeto desenvolvido se trata de uma adaptação do jogo **"Taco Gato Cabra Qu
   * Todos os jogadores devem reagir rapidamente (bater no monte)
   * O último a reagir sofre penalidade
 
-A proposta do projeto é simular esse comportamento em ambiente concorrente, com múltiplos jogadores (humanos e/ou bots) executando ações de forma independente.
+A proposta do projeto é simular esse comportamento em ambiente concorrente, com múltiplos jogadores executando ações de forma independente.
 
 ---
 
@@ -85,7 +85,7 @@ T1/
   Contém a lógica central do jogo, incluindo controle de turnos, validação de regras e fluxo da partida.
 
 * **player.go**
-  Implementa o comportamento dos jogadores (humanos e/ou bots), incluindo ações e reações.
+  Implementa o comportamento dos jogadores, incluindo ações e reações.
 
 * **deck.go**
   Responsável pela criação, organização e manipulação do baralho/cartas do jogo.
