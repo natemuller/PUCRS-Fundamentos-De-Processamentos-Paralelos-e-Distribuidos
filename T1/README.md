@@ -112,7 +112,7 @@ O projeto atende aos seguintes requisitos definidos no enunciado:
 
 ## 🏗️ Implementação
 
-...
+Inicialmente, adotamos a abordagem de considerar um baralho de 36 cartas distribuídas igualmente em um número fixo de 3 jogadores (1 player + 2 bots), totalizando 12 para cada um.
 
 ---
 
