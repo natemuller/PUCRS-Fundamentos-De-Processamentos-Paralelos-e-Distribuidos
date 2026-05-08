@@ -114,6 +114,10 @@ O projeto atende aos seguintes requisitos definidos no enunciado:
 
 Inicialmente, adotamos a abordagem de considerar um baralho de 36 cartas distribuídas igualmente em um número fixo de 3 jogadores (1 player + 2 bots), totalizando 12 para cada um.
 
+O arquivo `deck.go` é responsável por definir o tipo `Card`, declarar as cartas do jogo e criar o baralho. A função `NewDeck()` monta um slice de 36 cartas, embaralha os elementos usando `rand.Shuffle` e entrega um deck pronto para ser distribuído.
+
+O arquivo `player.go` define a estrutura de jogadores e comandos do jogo. Ele também cria os três participantes iniciais e implementa o comportamento de bots que aguardam um tempo randômico antes de enviar ações ao canal de comando.
+
 ---
 
 ## 📊 Diagrama visual

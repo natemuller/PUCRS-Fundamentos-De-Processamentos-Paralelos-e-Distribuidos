@@ -1,7 +1,9 @@
-// Funcionamento desejado: Cria as cartas como constantes do tipo "Card".
+// Funcionamento desejado:
+// Cria as cartas como constantes do tipo "Card".
 // Cria uma listinha com todas as cartas.
 // Em 2 for encadeados, cria o deck de 36 cartas, sendo 12 para cadaa jogador, de maneria aleatória.
-// Embaralhador de cartas utilizando uma função anônima para trocar as cartas de posições.
+// Embaralhar de cartas utilizando uma função anônima para trocar as cartas de posições.
+// Este arquivo não implementa nenhum conceito de concorrência, somente implementa a lógica das cartas.
 
 package main
 
