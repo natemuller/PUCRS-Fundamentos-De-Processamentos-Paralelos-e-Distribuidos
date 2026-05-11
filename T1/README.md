@@ -136,9 +136,9 @@ O arquivo `game.go` contém a lógica central do jogo, incluindo as estruturas `
 
 ---
 
-## 📊 Diagrama visual
+## 📊 Documento de Arquitetura
 
-O diagrama de goroutines e channels, pode ser encontrado em:
+O Documento detalhado de Arquitetura pode ser encontrado em:
 
 ```
 /Diagrama/Diagrama.pdf
