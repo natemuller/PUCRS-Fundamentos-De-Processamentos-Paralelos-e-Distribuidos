@@ -118,6 +118,8 @@ O arquivo `deck.go` é responsável por definir o tipo `Card`, declarar as carta
 
 O arquivo `player.go` define a estrutura de jogadores e comandos do jogo. Ele também cria os três participantes iniciais e implementa o comportamento de bots que aguardam um tempo randômico antes de enviar ações ao canal de comando.
 
+O arquivo `game.go` contém a lógica central do jogo, incluindo as estruturas `GameEvent` e `GameState` para gerenciar mensagens e o estado da partida. A função `gameLoop()` coordena o fluxo da partida usando `select` para multiplexar comandos e sinais de encerramento, enquanto `playTurn()` revela cartas, compara com a sequência e avança o turno.
+
 ---
 
 ## 📊 Diagrama visual

@@ -1,5 +1,4 @@
 // Funcionamento desejado:
-// Funcionamento desejado:
 // Cria uma struct para definir o jogador (nome, id, bool para verificar se é bot)
 // Cria uma struct para definir os comandos, ou seja, uma ação enviada para o jogo (“Don't communicate by sharing memory; share memory by communicating.”)
 // Função simples para criar os players, sendo um jogador e dois bots
@@ -22,6 +21,7 @@ type Player struct {
 	name string
 	id   int
 	bot  bool
+	hand []Card
 }
 
 type Command struct {
@@ -29,7 +29,7 @@ type Command struct {
 	action   string
 }
 
-func CreatePlayers() []Player {
+func createPlayers() []Player {
 	return []Player{
 		{id: 1, name: "Jogador", bot: false},
 		{id: 2, name: "Bot 1", bot: true},
