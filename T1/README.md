@@ -79,7 +79,7 @@ T1/
 ### 📌 Organização dos Arquivos
 
 * **main.go**
-  Responsável por inicializar o sistema, criar as goroutines e coordenar o fluxo principal da aplicação.
+  Responsável por inicializar o sistema, criar as goroutines e coordenar o fluxo principal da aplicação. Define quatro goroutines concorrentes: `gameLoop()` (controla a lógica do jogo), `renderer()` (exibe eventos em tempo real), `inputPlayer()` (captura entrada do usuário) e `automaticTurns()` (executa turnos automáticos). Utiliza channels para comunicação entre as goroutines e um canal `done` para shutdown gracioso.
 
 * **game.go**
   Contém a lógica central do jogo, incluindo controle de turnos, validação de regras e fluxo da partida.
@@ -105,8 +105,20 @@ O projeto atende aos seguintes requisitos definidos no enunciado:
 * ✔ Execução sem erros com:
 
   ```bash
-  go run -race
+  go run -race .
   ```
+
+---
+
+## � Controles e Comandos
+
+Durante o jogo, os seguintes comandos estão disponíveis:
+
+* **ENTER** - Revelar carta do jogador humano (ou esperar 2 segundos pela revelação automática)
+* **s** - Bater no monte (quando houver match)
+* **q** - Sair do jogo
+
+**Nota:** O jogador humano pode revelar sua carta manualmente pressionando ENTER ou aguardar a revelação automática que ocorre a cada 2 segundos.
 
 ---
 
@@ -114,11 +126,13 @@ O projeto atende aos seguintes requisitos definidos no enunciado:
 
 Inicialmente, adotamos a abordagem de considerar um baralho de 36 cartas distribuídas igualmente em um número fixo de 3 jogadores (1 player + 2 bots), totalizando 12 para cada um.
 
-O arquivo `deck.go` é responsável por definir o tipo `Card`, declarar as cartas do jogo e criar o baralho. A função `NewDeck()` monta um slice de 36 cartas, embaralha os elementos usando `rand.Shuffle` e entrega um deck pronto para ser distribuído.
+**main.go** - Orquestra toda a concorrência do jogo. Inicializa os channels (`commandCh`, `renderCh`, `done`) e cria as quatro goroutines principais. A função `renderer()` recebe eventos de jogo e os exibe na tela de forma contínua. A função `inputPlayer()` captura entradas do teclado do jogador humano e as envia como comandos. A função `automaticTurns()` simula turnos automáticos do primeiro bot em intervalos regulares. Todas as goroutines comunicam-se exclusivamente via channels, demonstrando o paradigma "share memory by communicating".
 
-O arquivo `player.go` define a estrutura de jogadores e comandos do jogo. Ele também cria os três participantes iniciais e implementa o comportamento de bots que aguardam um tempo randômico antes de enviar ações ao canal de comando.
+O arquivo `deck.go` é responsável por definir o tipo `Card`, declarar as cartas do jogo e criar o baralho. A função `newDeck()` monta um slice de 36 cartas, embaralha os elementos usando `rand.Shuffle` e entrega um deck pronto para ser distribuído.
 
-O arquivo `game.go` contém a lógica central do jogo, incluindo as estruturas `GameEvent` e `GameState` para gerenciar mensagens e o estado da partida. A função `gameLoop()` coordena o fluxo da partida usando `select` para multiplexar comandos e sinais de encerramento, enquanto `playTurn()` revela cartas, compara com a sequência e avança o turno.
+O arquivo `player.go` define a estrutura de jogadores e comandos do jogo. Ele também cria os três participantes iniciais (1 jogador humano e 2 bots) e implementa o comportamento de bots através da função `botPlayer()` que aguarda um tempo randômico antes de enviar ações ao canal de comando.
+
+O arquivo `game.go` contém a lógica central do jogo, incluindo as estruturas `GameEvent` e `GameState` para gerenciar mensagens e o estado da partida. A função `gameLoop()` coordena o fluxo da partida usando `select` para multiplexar comandos e sinais de encerramento, sendo o único ponto que modifica o estado do jogo (garantindo consistência). A função `playTurn()` revela cartas, compara com a sequência e avança o turno. A função `handleSlap()` gerencia as batidas no monte, validando timing e determinando o perdedor da rodada.
 
 ---
 
