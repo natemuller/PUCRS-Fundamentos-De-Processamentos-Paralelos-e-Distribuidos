@@ -52,8 +52,8 @@ O projeto utiliza conceitos fundamentais de concorrência, como:
 ```text
 T1/
 │
-├── Diagrama/
-│   └── Diagrama.pdf
+├── Arquitetura/
+│   └── DocDeArquitetura.pdf
 │
 ├── Enunciado/
 │   └── ENUNCIADO.pdf
