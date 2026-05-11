@@ -44,7 +44,7 @@ func botPlayer(player Player, commandCh chan<- Command, done <-chan struct{}) {
 			return
 
 		default:
-			time.Sleep(time.Duration(rand.Intn(2000)+4000) * time.Millisecond)
+			time.Sleep(time.Duration(rand.Intn(4000)+6000) * time.Millisecond)
 
 			commandCh <- Command{
 				playerId: player.id,

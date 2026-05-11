@@ -68,7 +68,7 @@ func gameLoop(commandCh <-chan Command, renderCh chan<- GameEvent, done <-chan s
 func playTurn(state *GameState, renderCh chan<- GameEvent) {
 	if state.canSlap {
 		renderCh <- GameEvent{
-			message: "Existe um match pendente. Todos precisam bater antes da próxima carta.",
+			message: "Match pendente. Todos precisam bater antes da próxima carta.",
 		}
 		return
 	}

@@ -19,7 +19,7 @@ func renderer(renderCh <-chan GameEvent, done <-chan struct{}) {
 			fmt.Print("\033[H\033[2J")
 
 			fmt.Println("===================================")
-			fmt.Println("      Taco Gato Cabra Queijo")
+			fmt.Println("      Taco Gato Cabra Queijo Pizza")
 			fmt.Println("===================================")
 			fmt.Println()
 
