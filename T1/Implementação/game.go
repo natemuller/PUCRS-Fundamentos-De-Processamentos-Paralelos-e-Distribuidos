@@ -32,6 +32,15 @@ type GameState struct {
 
 var sequence = []Card{Taco, Gato, Cabra, Queijo, Pizza}
 
+func getPlayerName(state *GameState, playerId int) string {
+	for _, p := range state.players {
+		if p.id == playerId {
+			return p.name
+		}
+	}
+	return "desconhecido"
+}
+
 func gameLoop(commandCh <-chan Command, renderCh chan<- GameEvent, done <-chan struct{}) {
 	deck := newDeck()
 	players := createPlayers()
@@ -119,8 +128,15 @@ func playTurn(state *GameState, renderCh chan<- GameEvent) {
 
 func handleSlap(state *GameState, cmd Command, renderCh chan<- GameEvent) {
 	if !state.canSlap {
+		playerName := "desconhecido"
+		for _, p := range state.players {
+			if p.id == cmd.playerId {
+				playerName = p.name
+				break
+			}
+		}
 		renderCh <- GameEvent{
-			message: fmt.Sprintf("Jogador %d bateu fora de hora.", cmd.playerId),
+			message: fmt.Sprintf("%s bateu fora de hora.", playerName),
 		}
 		return
 	}
@@ -134,7 +150,7 @@ func handleSlap(state *GameState, cmd Command, renderCh chan<- GameEvent) {
 	state.slapOrder = append(state.slapOrder, cmd.playerId)
 
 	renderCh <- GameEvent{
-		message: fmt.Sprintf("Jogador %d bateu no monte!", cmd.playerId),
+		message: fmt.Sprintf("%s bateu no monte!", getPlayerName(state, cmd.playerId)),
 	}
 
 	if len(state.slapOrder) == len(state.players) {
