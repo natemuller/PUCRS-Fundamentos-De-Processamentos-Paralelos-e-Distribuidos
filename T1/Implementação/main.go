@@ -108,5 +108,5 @@ func main() {
 
 	time.Sleep(4000 * time.Millisecond)
 
-	fmt.Println("\nJogo encerrado.")
+	fmt.Println("\nFim de jogo.")
 }

@@ -151,7 +151,6 @@ func handleSlap(state *GameState, cmd Command, renderCh chan<- GameEvent) {
 				break
 			}
 		}
-
 		state.pile = []Card{}
 		state.canSlap = false
 		state.slapOrder = []int{}

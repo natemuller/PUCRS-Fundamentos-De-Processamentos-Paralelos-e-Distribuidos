@@ -110,7 +110,7 @@ O projeto atende aos seguintes requisitos definidos no enunciado:
 
 ---
 
-## � Controles e Comandos
+## 🕹️ Controles e Comandos
 
 Durante o jogo, os seguintes comandos estão disponíveis:
 
@@ -126,7 +126,8 @@ Durante o jogo, os seguintes comandos estão disponíveis:
 
 Inicialmente, adotamos a abordagem de considerar um baralho de 36 cartas distribuídas igualmente em um número fixo de 3 jogadores (1 player + 2 bots), totalizando 12 para cada um.
 
-**main.go** - Orquestra toda a concorrência do jogo. Inicializa os channels (`commandCh`, `renderCh`, `done`) e cria as quatro goroutines principais. A função `renderer()` recebe eventos de jogo e os exibe na tela de forma contínua. A função `inputPlayer()` captura entradas do teclado do jogador humano e as envia como comandos. A função `automaticTurns()` simula turnos automáticos do primeiro bot em intervalos regulares. Todas as goroutines comunicam-se exclusivamente via channels, demonstrando o paradigma "share memory by communicating".
+* * **main.go**
+  Responsável por inicializar o sistema, criar os channels e coordenar o fluxo principal da aplicação. Define as goroutines principais do sistema, incluindo `gameLoop()` (controla a lógica do jogo), `renderer()` (exibe eventos em tempo real), `inputPlayer()` (captura entrada do usuário), `automaticTurns()` (executa turnos automáticos) e as goroutines dos bots com `botPlayer()`. Utiliza channels para comunicação entre as goroutines e um canal `done` para shutdown gracioso.
 
 O arquivo `deck.go` é responsável por definir o tipo `Card`, declarar as cartas do jogo e criar o baralho. A função `newDeck()` monta um slice de 36 cartas, embaralha os elementos usando `rand.Shuffle` e entrega um deck pronto para ser distribuído.
 
@@ -141,7 +142,7 @@ O arquivo `game.go` contém a lógica central do jogo, incluindo as estruturas `
 O Documento detalhado de Arquitetura pode ser encontrado em:
 
 ```
-/Diagrama/Diagrama.pdf
+/Arquitetura/DocDeArquitetura.pdf
 ```
 
 
