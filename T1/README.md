@@ -53,6 +53,7 @@ O projeto utiliza conceitos fundamentais de concorrência, como:
 T1/
 │
 ├── Arquitetura/
+│   └── DiagramaDeArquitetura.pdf
 │   └── DocDeArquitetura.pdf
 │
 ├── Enunciado/
