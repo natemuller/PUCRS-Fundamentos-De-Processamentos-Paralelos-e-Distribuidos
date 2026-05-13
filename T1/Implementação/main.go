@@ -76,7 +76,7 @@ func automaticTurns(commandCh chan<- Command, done <-chan struct{}) {
 			time.Sleep(2 * time.Second)
 
 			commandCh <- Command{
-				playerId: 0,
+				playerId: 1,
 				action:   "reveal",
 			}
 		}
