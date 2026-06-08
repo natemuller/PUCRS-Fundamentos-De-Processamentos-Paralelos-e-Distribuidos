@@ -25,7 +25,7 @@ type ResultadoPi struct {
 func main() {
 	endereco := "localhost:9000"
 	if len(os.Args) >= 2 {
-		endereco = os.Args[1]
+		endereco = os.Args[3]
 	}
 
 	fmt.Printf("Conectando ao servidor RPC em %s...\n", endereco)
@@ -54,10 +54,12 @@ func main() {
 		fmt.Printf("EstimarPi(%d)           = %f\n", pi.Amostras, pi.Valor)
 	}
 
-	// TODO: chame SomarIntervalo remotamente.
-	// 1. Declare uma variável de resposta: var soma int64
-	// 2. Use client.Call("NumericaService.SomarIntervalo", &Intervalo{1, 1000}, &soma)
-	// 3. Imprima o resultado.
-	// Dica: siga o padrão de ContarPrimos acima.
-	fmt.Println("\nSomarIntervalo: não implementado (TODO)")
+	// --- SomarIntervalo ---
+	var soma int64
+	err = client.Call("NumericaService.SomarIntervalo", &Intervalo{1, 1000}, &soma)
+	if err != nil {
+		log.Printf("Erro em SomarIntervalo: %v\n", err)
+	} else {
+		fmt.Printf("SomarIntervalo(1, 1000) = %d\n", soma)
+	}
 }

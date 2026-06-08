@@ -1,0 +1,8 @@
+Q1. Não, no modelo publish-subscribe tanto publishers quanto subscribers operam de forma independente sem precisarem se conhecer
+. Essa independência é a essência do desacoplamento espacial, pois a interação ocorre apenas de forma indireta através do intermediário (broker) e dos tópicos
+.
+Q2. Não, ao alterar o nome da sala você deixa de receber as mensagens porque cada sala funciona como um grupo lógico isolado atrelado a um subject específico
+. Na comunicação em grupo nesse modelo, o grupo não é estático, mas sim formado dinamicamente pelo interesse em um tópico comum
+.
+Q3. Esse cenário caracteriza um grupo aberto, já que qualquer processo externo pode se inscrever e interagir sem precisar de autorização
+. As principais implicações de segurança são a falta de confidencialidade (qualquer um pode escutar suas mensagens) e a quebra de integridade (qualquer um pode falsificar mensagens privadas se passando por outra pessoa)

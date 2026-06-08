@@ -73,9 +73,19 @@ func (s *NumericaService) EstimarPi(args *ArgIteracoes, reply *ResultadoPi) erro
 	return nil
 }
 
-// TODO: implemente SomarIntervalo no servidor.
-// Assinatura: func (s *NumericaService) SomarIntervalo(args *Intervalo, reply *int64) error
-// A função deve somar todos os inteiros de args.Inicio até args.Fim (inclusive).
+// --- NOVA FUNÇÃO IMPLEMENTADA AQUI ---
+func (s *NumericaService) SomarIntervalo(args *Intervalo, reply *int64) error {
+	var soma int64
+	// Soma todos os inteiros de Inicio até Fim (inclusive)
+	for i := args.Inicio; i <= args.Fim; i++ {
+		soma += i
+	}
+	*reply = soma
+
+	// Imprime a chamada recebida no terminal do servidor
+	fmt.Printf("  SomarIntervalo(%d, %d) = %d\n", args.Inicio, args.Fim, *reply)
+	return nil
+}
 
 func main() {
 	endereco := ":9000"

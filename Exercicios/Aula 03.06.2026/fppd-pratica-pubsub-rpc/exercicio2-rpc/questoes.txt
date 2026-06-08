@@ -1,0 +1,8 @@
+Q4. Se o servidor for desligado, a chamada RPC retornará um erro de rede, situação diferente de uma chamada de função local (onde não há rede envolvida e o programa inteiro simplesmente falharia)
+. Isso demonstra que a transparência semântica é impossível em RPC, pois o programador não pode fingir que a rede não existe e sempre precisará implementar tratamentos para atrasos e falhas de comunicação
+.
+Q5. Não, por ser exclusivo do Go, o encoding/gob restringe a comunicação, impedindo que um cliente em Python faça chamadas a esse servidor sem bibliotecas complexas de terceiros
+. A grande vantagem de formatos neutros, como Protocol Buffers e JSON, é garantir a interoperabilidade, permitindo que sistemas desenvolvidos em linguagens e arquiteturas completamente diferentes troquem dados de forma transparente
+.
+Q6. Em alto nível, o cliente dividiria o intervalo total em 4 partes menores (ex: 1 a 250.000) e faria chamadas RPC de forma concorrente para os 4 servidores, esperando as respostas para somá-las
+. A grande vantagem dessa técnica de Divisão e Conquista é o expressivo ganho de desempenho via paralelismo, já que o processamento pesado seria distribuído ao invés de sobrecarregar uma única máquina
